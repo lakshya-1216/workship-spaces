@@ -1,5 +1,5 @@
 export const API_BASE =
-  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:5000";
+  import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") || "https://workship-spaces-1.onrender.com";
 
 export function apiUrl(path: string) {
   return `${API_BASE}${path.startsWith("/") ? path : `/${path}`}`;

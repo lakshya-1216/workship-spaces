@@ -32,7 +32,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // Must be kept in sync with API_BASE in src/lib/api.ts
 const API_BASE =
   (import.meta as Record<string, unknown> & { env?: Record<string, string> }).env
-    ?.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "http://localhost:5000";
+    ?.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "https://workship-spaces-1.onrender.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
