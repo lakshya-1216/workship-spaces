@@ -217,7 +217,7 @@ function HomePage() {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
         {/* ── Content ───────────────────────────────────────────────────── */}
-        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-6 pt-4 text-center md:px-6 md:pb-10 md:pt-8 lg:pb-14 lg:pt-10">
+        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-6 pt-8 text-center md:px-6 md:pb-12 md:pt-16 lg:pb-16 lg:pt-20">
           <div className="flex max-w-4xl flex-col items-center">
 
             {/* Badge */}
