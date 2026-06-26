@@ -141,7 +141,7 @@ function HomePage() {
   return (
     <div>
       {/* ── Premium Aurora Hero ───────────────────────────────────────────── */}
-      <section className="hero-aurora relative overflow-hidden">
+      <section className="hero-aurora relative overflow-visible">
         {/* ── Background layers: photo + dark veil ─────────────────────── */}
         <div className="absolute inset-0 -z-10 group">
           <img
@@ -217,16 +217,16 @@ function HomePage() {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
         {/* ── Content ───────────────────────────────────────────────────── */}
-        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-6 pt-8 text-center md:px-6 md:pb-12 md:pt-16 lg:pb-16 lg:pt-20">
+        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-6 pt-4 text-center md:px-6 md:pb-10 md:pt-8 lg:pb-14 lg:pt-10">
           <div className="flex max-w-4xl flex-col items-center">
 
             {/* Badge */}
             <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary-hover backdrop-blur-md transition-transform hover:scale-105">
-              <Sparkles className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">Personalized Workspace Recommendations</span>
+              <Sparkles className="h-1.5 w-3.5 shrink-0" /> <span className="truncate">Personalized Workspace Recommendations</span>
             </span>
 
             {/* Headline with gradient text */}
-            <h1 className="hero-gradient-text mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-balance transition-all duration-500">
+            <h1 className="hero-gradient-text mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
               Find a place that matches the work you came to do.
             </h1>
 
