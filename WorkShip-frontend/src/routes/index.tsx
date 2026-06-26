@@ -222,7 +222,7 @@ function HomePage() {
 
             {/* Badge */}
             <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary-hover backdrop-blur-md transition-transform hover:scale-105">
-              <Sparkles className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">AI-powered workspace discovery</span>
+              <Sparkles className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">Personalized Workspace Recommendations</span>
             </span>
 
             {/* Headline with gradient text */}
@@ -232,7 +232,7 @@ function HomePage() {
 
             {/* Sub-headline */}
             <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-xl">
-              From quiet studios to rooftop desks — book by the hour, chat with hosts in real time,
+              From quiet studios to rooftop desks - book by the hour, chat with hosts in real time,
               and just show up.
             </p>
 
@@ -402,3 +402,4 @@ function HomePage() {
     </div>
   );
 }
+

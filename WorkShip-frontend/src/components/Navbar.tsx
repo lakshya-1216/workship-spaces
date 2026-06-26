@@ -565,13 +565,10 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border glass">
-      {/* ── Main bar ───────────────────────────────────────────────── */}
-      <div className="mx-auto flex h-[68px] w-full max-w-[1440px] items-center justify-between md:justify-start gap-2 md:gap-6 px-4 md:px-10">
-
-        {/* LEFT – Logo */}
+      {/* Main bar */}
+      <div className="mx-auto flex h-[68px] w-full max-w-[1440px] items-center justify-between gap-2 px-4 md:justify-start md:gap-6 md:px-10">
         <Logo />
 
-        {/* CENTER – Search (grows to fill space, capped) */}
         <div className="hidden flex-1 md:flex md:justify-center">
           <div className="w-full max-w-md">
             <CityAutocomplete
@@ -587,15 +584,12 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* RIGHT – Nav actions */}
         <nav className="ml-auto flex shrink-0 items-center gap-1">
           <ThemeToggle />
 
           {isAuthenticated ? (
             <>
-              {/* Lightweight text links – visible on xl+ */}
               <div className="mr-2 hidden items-center gap-5 xl:flex">
-                {/* <NavLink to="/search" label="Explore" /> */}
                 <NavLink to="/wishlist" label="Wishlist" />
                 <NavLink to="/dashboard" label="Dashboard" search={{ tab: "profile" } as never} />
                 {isHostLoggedIn ? (
@@ -609,7 +603,6 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Icon cluster */}
               <div className="flex items-center gap-0.5">
                 <IconButton to="/chat" label="Messages" badge={unread}>
                   <MessageCircle className="h-4 w-4" />
@@ -617,10 +610,8 @@ export function Navbar() {
                 <NotificationBell token={token} />
               </div>
 
-              {/* Divider */}
               <div className="mx-3 h-6 w-px bg-border" />
 
-              {/* Profile button */}
               <div className="relative">
                 <button
                   onClick={() => setProfileOpen((v) => !v)}
@@ -684,7 +675,6 @@ export function Navbar() {
             </>
           ) : (
             <>
-              {/* Guest - Desktop */}
               <div className="mx-1 hidden h-6 w-px bg-border md:block" />
               <Link
                 to="/login"
@@ -699,8 +689,7 @@ export function Navbar() {
                 Sign up
               </Link>
 
-              {/* Guest - Mobile Menu */}
-              <div className="relative md:hidden ml-1">
+              <div className="relative ml-1 md:hidden">
                 <button
                   onClick={() => setMobileMenuOpen((v) => !v)}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-elevated text-foreground shadow-sm transition-all hover:bg-secondary"
@@ -735,7 +724,6 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile search row */}
       {!isHostArea && (
         <div className="px-4 pb-3 md:hidden">
           <CityAutocomplete

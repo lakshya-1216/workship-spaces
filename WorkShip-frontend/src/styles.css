@@ -160,6 +160,7 @@
     background: color-mix(in oklab, var(--background) 70%, transparent);
     backdrop-filter: saturate(180%) blur(14px);
   }
+
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -302,4 +303,6 @@
   background-size: 128px;
 }
 .dark .hero-noise { opacity: 0.04; }
+
+
 
