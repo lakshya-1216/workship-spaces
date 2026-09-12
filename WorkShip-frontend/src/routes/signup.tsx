@@ -7,6 +7,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { apiUrl } from "@/lib/api";
+import { GoogleAuthButton } from "@/components/GoogleAuthButton";
 
 export const Route = createFileRoute("/signup")({
   component: SignupPage,
@@ -111,6 +112,14 @@ function SignupPage() {
               {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
             </Button>
           </form>
+
+          <div className="my-6 flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <div className="h-px flex-1 bg-border" />
+            <span>or</span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          <GoogleAuthButton label="Sign up with Google" />
 
           <div className="mt-6 text-center text-sm text-muted-foreground">
             Already have an account?{" "}

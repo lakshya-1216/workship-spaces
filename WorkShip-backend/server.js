@@ -4,9 +4,15 @@ const http = require('http');
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const session = require('express-session');
+const { passport, configurePassport } = require('./config/passport');
 
 const app = express();
 const server = http.createServer(app);
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
 
 // ── Socket.io setup ────────────────────────────────────────────────────────────
 const io = new Server(server, {
@@ -58,6 +64,23 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.OAUTH_SESSION_SECRET || process.env.JWT_SECRET || 'workship-oauth-dev-secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production'
+    }
+  })
+);
+const googleOAuthConfigured = configurePassport();
+if (!googleOAuthConfigured) {
+  console.warn('Google OAuth is not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_CALLBACK_URL.');
+}
+app.use(passport.initialize());
 
 // ── Routes ─────────────────────────────────────────────────────────────────────
 const authRoutes = require('./routes/authRoutes');

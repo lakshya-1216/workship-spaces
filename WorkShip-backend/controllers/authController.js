@@ -1,31 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { sendOtpEmail } = require('../utils/mailer');
-
-function createToken(user) {
-  return jwt.sign(
-    {
-      userId: user._id,
-      isHost: user.isHost,
-      role: user.role
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: '1d' }   // 24-hour session
-  );
-}
-
-function toUserResponse(user) {
-  return {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    phone: user.phone || '',
-    profilePicture: user.profilePicture || '',
-    isHost: user.isHost,
-    role: user.role
-  };
-}
+const { createToken, toUserResponse } = require('../utils/authTokens');
 
 // @route   POST /auth/signup
 // @desc    Register a new user
@@ -37,6 +13,7 @@ exports.signup = async (req, res) => {
     }
 
     const { name, email, password } = req.body;
+    const normalizedEmail = email?.toLowerCase().trim();
 
     // Validate input
     if (!name || !email || !password) {
@@ -44,7 +21,7 @@ exports.signup = async (req, res) => {
     }
 
     // Check if user exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
@@ -56,8 +33,9 @@ exports.signup = async (req, res) => {
     // Save user
     const newUser = new User({
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
+      provider: 'local',
       role: 'user'
     });
 
@@ -89,12 +67,16 @@ exports.login = async (req, res) => {
     }
 
     // Check for user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     // Check password
+    if (!user.password) {
+      return res.status(400).json({ message: 'Please continue with Google for this account' });
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });

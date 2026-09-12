@@ -27,6 +27,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkspaceIdRouteImport } from './routes/workspace.$id'
 import { Route as BookingsIdRouteImport } from './routes/bookings.$id'
 import { Route as BookingIdRouteImport } from './routes/booking.$id'
+import { Route as AuthOauthCallbackRouteImport } from './routes/auth.oauth.callback'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -118,6 +119,11 @@ const BookingIdRoute = BookingIdRouteImport.update({
   path: '/booking/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthOauthCallbackRoute = AuthOauthCallbackRouteImport.update({
+  id: '/auth/oauth/callback',
+  path: '/auth/oauth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/booking/$id': typeof BookingIdRoute
   '/bookings/$id': typeof BookingsIdRoute
   '/workspace/$id': typeof WorkspaceIdRoute
+  '/auth/oauth/callback': typeof AuthOauthCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/booking/$id': typeof BookingIdRoute
   '/bookings/$id': typeof BookingsIdRoute
   '/workspace/$id': typeof WorkspaceIdRoute
+  '/auth/oauth/callback': typeof AuthOauthCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/booking/$id': typeof BookingIdRoute
   '/bookings/$id': typeof BookingsIdRoute
   '/workspace/$id': typeof WorkspaceIdRoute
+  '/auth/oauth/callback': typeof AuthOauthCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/bookings/$id'
     | '/workspace/$id'
+    | '/auth/oauth/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/bookings/$id'
     | '/workspace/$id'
+    | '/auth/oauth/callback'
   id:
     | '__root__'
     | '/'
@@ -241,6 +252,7 @@ export interface FileRouteTypes {
     | '/booking/$id'
     | '/bookings/$id'
     | '/workspace/$id'
+    | '/auth/oauth/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   BookingIdRoute: typeof BookingIdRoute
   BookingsIdRoute: typeof BookingsIdRoute
   WorkspaceIdRoute: typeof WorkspaceIdRoute
+  AuthOauthCallbackRoute: typeof AuthOauthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -392,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/oauth/callback': {
+      id: '/auth/oauth/callback'
+      path: '/auth/oauth/callback'
+      fullPath: '/auth/oauth/callback'
+      preLoaderRoute: typeof AuthOauthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -414,6 +434,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookingIdRoute: BookingIdRoute,
   BookingsIdRoute: BookingsIdRoute,
   WorkspaceIdRoute: WorkspaceIdRoute,
+  AuthOauthCallbackRoute: AuthOauthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

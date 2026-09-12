@@ -7,6 +7,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { apiUrl } from "@/lib/api";
+import { GoogleAuthButton } from "@/components/GoogleAuthButton";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
@@ -80,7 +81,10 @@ function LoginPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <Link to="/forgot-password" className="text-xs font-medium text-primary-hover hover:underline">
+                <Link
+                  to="/forgot-password"
+                  className="text-xs font-medium text-primary-hover hover:underline"
+                >
                   Forgot password?
                 </Link>
               </div>
@@ -104,6 +108,14 @@ function LoginPage() {
               {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
             </Button>
           </form>
+
+          <div className="my-6 flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <div className="h-px flex-1 bg-border" />
+            <span>or</span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          <GoogleAuthButton label="Continue with Google" />
 
           <div className="mt-6 text-center text-sm text-muted-foreground">
             Don't have an account?{" "}
