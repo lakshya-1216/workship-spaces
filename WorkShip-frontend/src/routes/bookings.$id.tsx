@@ -156,7 +156,7 @@ function BookingDetailsPage() {
                   >
                     {booking.status}
                   </span>
-                  <h1 className="mt-3 font-display text-3xl font-bold">
+                  <h1 className="mt-3 text-3xl font-bold">
                     {booking.workspace?.title || "Deleted workspace"}
                   </h1>
                   <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
@@ -187,7 +187,7 @@ function BookingDetailsPage() {
             </section>
 
             <aside className="rounded-lg border border-border bg-surface p-5">
-              <h2 className="font-display text-xl font-bold">Booking summary</h2>
+              <h2 className="text-xl font-bold">Booking summary</h2>
               <div className="mt-4 space-y-3 text-sm">
                 <Row label="Total paid" value={`₹${booking.totalPrice}`} bold />
                 <Row
@@ -207,7 +207,7 @@ function BookingDetailsPage() {
             <section className="rounded-lg border border-border bg-surface p-5 lg:col-span-2">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h2 className="font-display text-xl font-bold">Review this workspace</h2>
+                  <h2 className="text-xl font-bold">Review this workspace</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Your review updates this workspace rating for other Workship users.
                   </p>
@@ -287,7 +287,7 @@ function BookingDetailsPage() {
           </div>
         ) : (
           <div className="mt-8 rounded-lg border border-border bg-surface p-8 text-center">
-            <h1 className="font-display text-2xl font-bold">Booking not found</h1>
+            <h1 className="text-2xl font-bold">Booking not found</h1>
             <p className="mt-2 text-sm text-muted-foreground">This booking could not be loaded.</p>
           </div>
         )}

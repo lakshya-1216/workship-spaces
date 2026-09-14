@@ -106,7 +106,7 @@ export function MockPaymentModal({
       }}
     >
       <div
-        className="relative w-full max-w-md rounded-3xl border border-border bg-surface-elevated shadow-2xl"
+        className="relative w-full max-w-md rounded-xl border border-border bg-surface-elevated shadow-[var(--shadow-pop)]"
         role="dialog"
         aria-modal="true"
         aria-label="Payment"
@@ -133,10 +133,10 @@ export function MockPaymentModal({
                 Secure Checkout
               </p>
             </div>
-            <h2 className="mt-3 font-display text-2xl font-bold">Booking Summary</h2>
+            <h2 className="mt-3 text-2xl font-bold">Booking Summary</h2>
 
             {/* Details */}
-            <div className="mt-5 space-y-2 rounded-2xl border border-border bg-background p-4 text-sm">
+            <div className="mt-5 space-y-2 rounded-xl border border-border bg-background p-4 text-sm">
               <SummaryRow label="Workspace" value={workspaceTitle} bold />
               <SummaryRow label="Date" value={formatDate(date)} />
               <SummaryRow label="Duration" value={`${hours} hour${hours > 1 ? "s" : ""}`} />
@@ -148,7 +148,7 @@ export function MockPaymentModal({
 
             <button
               onClick={() => setStep("method")}
-              className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] active:scale-[0.98]"
+              className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover active:scale-[0.98]"
             >
               Choose Payment Method →
             </button>
@@ -164,7 +164,7 @@ export function MockPaymentModal({
             >
               ← Back
             </button>
-            <h2 className="font-display text-2xl font-bold">Payment Method</h2>
+            <h2 className="text-2xl font-bold">Payment Method</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               Select how you'd like to pay ₹{total}
             </p>
@@ -174,7 +174,7 @@ export function MockPaymentModal({
                 <button
                   key={method}
                   onClick={() => setSelectedMethod(method)}
-                  className={`flex w-full items-center gap-4 rounded-2xl border p-4 text-left transition-all duration-200 ${
+                  className={`flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-all duration-200 ${
                     selectedMethod === method
                       ? "border-primary bg-primary/10 shadow-sm"
                       : "border-border hover:border-primary/30 hover:bg-secondary/50"
@@ -204,7 +204,7 @@ export function MockPaymentModal({
 
             <button
               onClick={handlePay}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] active:scale-[0.98]"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover active:scale-[0.98]"
             >
               Pay ₹{total} with {METHOD_LABELS[selectedMethod]}
             </button>
@@ -219,13 +219,12 @@ export function MockPaymentModal({
         {step === "processing" && (
           <div className="flex flex-col items-center justify-center gap-5 px-7 py-14 text-center">
             <div className="relative flex h-20 w-20 items-center justify-center">
-              <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
               <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-primary/15">
                 <Loader2 className="h-8 w-8 animate-spin text-primary-hover" />
               </span>
             </div>
             <div>
-              <p className="font-display text-xl font-bold">Processing Payment</p>
+              <p className="text-xl font-bold">Processing Payment</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Connecting with {METHOD_LABELS[selectedMethod]}…
               </p>
@@ -237,16 +236,16 @@ export function MockPaymentModal({
         {/* ── STEP: Success ── */}
         {step === "success" && result?.success && (
           <div className="flex flex-col items-center gap-4 px-7 py-10 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15 animate-fade-in">
-              <CheckCircle2 className="h-8 w-8 text-emerald-500" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/15 animate-fade-in">
+              <CheckCircle2 className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h2 className="font-display text-2xl font-bold">Payment Successful</h2>
+              <h2 className="text-2xl font-bold">Payment Successful</h2>
               <p className="mt-1 text-sm text-muted-foreground">Your booking has been confirmed</p>
             </div>
 
             {/* Receipt */}
-            <div className="w-full space-y-2 rounded-2xl border border-border bg-background p-4 text-sm text-left">
+            <div className="w-full space-y-2 rounded-xl border border-border bg-background p-4 text-sm text-left">
               <ReceiptRow label="Payment ID" value={result.paymentId} mono />
               <ReceiptRow label="Method" value={`${METHOD_ICONS[result.method]} ${METHOD_LABELS[result.method]}`} />
               <ReceiptRow label="Workspace" value={workspaceTitle} />
@@ -256,7 +255,7 @@ export function MockPaymentModal({
 
             <button
               onClick={onClose}
-              className="mt-1 inline-flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)]"
+              className="mt-1 inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover"
             >
               Done
             </button>
@@ -270,7 +269,7 @@ export function MockPaymentModal({
               <AlertTriangle className="h-8 w-8 text-red-500" />
             </div>
             <div>
-              <h2 className="font-display text-2xl font-bold">Payment Failed</h2>
+              <h2 className="text-2xl font-bold">Payment Failed</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 {result && !result.success ? result.error : "An error occurred. Please try again."}
               </p>
@@ -278,13 +277,13 @@ export function MockPaymentModal({
             <div className="mt-1 flex w-full flex-col gap-2">
               <button
                 onClick={handleRetry}
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover"
+                className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover"
               >
                 Try Again
               </button>
               <button
                 onClick={onClose}
-                className="inline-flex w-full items-center justify-center rounded-2xl border border-border px-5 py-3 text-sm font-semibold transition-all hover:bg-secondary"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-border px-5 py-3 text-sm font-semibold transition-all hover:bg-secondary"
               >
                 Cancel
               </button>

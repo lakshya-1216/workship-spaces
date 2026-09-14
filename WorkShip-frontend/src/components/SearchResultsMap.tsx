@@ -55,7 +55,7 @@ export function SearchResultsMap(props: SearchResultsMapProps) {
 
   if (props.workspaces.length === 0) {
     return (
-      <div className="relative flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-background">
+      <div className="relative flex h-full w-full flex-col items-center justify-center bg-muted">
         <div className="text-center">
           <p className="text-lg font-semibold text-foreground">No workspaces found</p>
           <p className="mt-1 text-sm text-muted-foreground">Try adjusting your filters</p>
@@ -66,7 +66,7 @@ export function SearchResultsMap(props: SearchResultsMapProps) {
 
   if (!ClientMap) {
     return (
-      <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary/50 to-background">
+      <div className="relative flex h-full w-full items-center justify-center bg-muted">
         <p className="text-sm text-muted-foreground">Loading map...</p>
       </div>
     );

@@ -112,11 +112,7 @@ function createMarkerIcon(active: boolean, hovered: boolean) {
 
   return L.divIcon({
     className: "",
-    html: `<div class="flex h-9 w-9 items-center justify-center rounded-full border-2 ${
-      isHighlighted
-        ? "border-teal-400 bg-teal-600 shadow-[0_0_12px_rgba(20,184,166,0.4)]"
-        : "border-white bg-teal-600 shadow-md"
-    } text-white text-xs font-bold transition-all duration-200 ${scale} ${brightness}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/></svg></div>`,
+    html: `<div class="flex h-9 w-9 items-center justify-center rounded-full border-2 ${isHighlighted ? "border-white bg-primary shadow-md" : "border-white/80 bg-primary/80"} text-white text-xs font-bold transition-all duration-200 ${scale} ${brightness}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/></svg></div>`,
     iconSize: [36, 36],
     iconAnchor: [18, 36],
   });
@@ -265,13 +261,13 @@ function WorkspacePreviewCard({
           <span
             className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
               isAvailable
-                ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-                : "bg-rose-500/15 text-rose-700 dark:text-rose-300"
+              ? "bg-primary/15 text-primary-hover"
+              : "bg-rose-500/15 text-rose-700"
             }`}
           >
             <span
               className={`h-1.5 w-1.5 rounded-full ${
-                isAvailable ? "bg-emerald-500" : "bg-rose-500"
+                isAvailable ? "bg-primary" : "bg-rose-500"
               }`}
             />
             {isAvailable ? "Available" : "Unavailable"}
@@ -281,7 +277,7 @@ function WorkspacePreviewCard({
         <Link
           to="/workspace/$id"
           params={{ id }}
-          className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-teal-600 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600"
+          className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-3 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           View Workspace
           <ChevronRight className="h-4 w-4" />
@@ -402,7 +398,7 @@ export function SearchResultsMap({
 }) {
   if (workspaces.length === 0) {
     return (
-      <div className="relative flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-background">
+      <div className="relative flex h-full w-full flex-col items-center justify-center bg-muted">
         <div className="text-center">
           <p className="text-lg font-semibold text-foreground">No workspaces found</p>
           <p className="mt-1 text-sm text-muted-foreground">Try adjusting your filters</p>
@@ -416,7 +412,7 @@ export function SearchResultsMap({
       center={defaultCenter}
       zoom={11}
       scrollWheelZoom={true}
-      className="h-full w-full dark:[&_.leaflet-control-attribution]:bg-black/20 dark:[&_.leaflet-tile-pane]:brightness-75 dark:[&_.leaflet-tile-pane]:contrast-125"
+      className="h-full w-full"
       style={{ zIndex: 1 }}
     >
       <TileLayer

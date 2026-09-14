@@ -78,7 +78,7 @@ export const Route = createFileRoute("/workspace/$id")({
   }),
   notFoundComponent: () => (
     <div className="mx-auto max-w-md py-32 text-center">
-      <h1 className="font-display text-3xl font-bold">Workspace not found</h1>
+      <h1 className="text-3xl font-bold">Workspace not found</h1>
       <Link to="/" className="mt-4 inline-block text-sm text-primary-hover underline">
         Back to home
       </Link>
@@ -202,10 +202,10 @@ function WorkspacePage() {
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">{ws.title}</h1>
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{ws.title}</h1>
           <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
             <span className="inline-flex items-center gap-1">
-              <Star className="h-4 w-4 fill-foreground" />
+              <Star className="h-4 w-4 fill-clay text-clay" />
               {rating ? rating.toFixed(1) : "New"} - {reviewCount} review
               {reviewCount === 1 ? "" : "s"}
             </span>
@@ -220,15 +220,15 @@ function WorkspacePage() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => toggle(id)}
-            className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-all hover:scale-105 ${
+            className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-colors ${
               liked
-                ? "border-rose-400 bg-rose-50 text-rose-500 dark:bg-rose-950"
+                ? "border-primary/40 bg-primary-soft text-primary-hover"
                 : "border-border hover:bg-secondary"
             }`}
             aria-label="Save to wishlist"
           >
             <Heart
-              className={`h-4 w-4 transition-all ${liked ? "fill-rose-500 text-rose-500" : ""}`}
+              className={`h-4 w-4 ${liked ? "fill-primary text-primary" : ""}`}
             />
             {liked ? "Saved" : "Save"}
           </button>
@@ -264,13 +264,13 @@ function WorkspacePage() {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-3xl">
+      <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-xl">
         <img
           src={images[0]}
           alt={ws.title}
           width={1024}
           height={768}
-          className="col-span-4 row-span-2 h-[420px] w-full object-cover md:col-span-2"
+          className="col-span-4 row-span-2 h-64 w-full object-cover sm:h-[380px] md:col-span-2 lg:h-[420px]"
         />
         {[1, 2, 0, 1].map((imageIndex, key) => (
           <img
@@ -298,13 +298,13 @@ function WorkspacePage() {
               />
               <div>
                 <p className="text-sm text-muted-foreground">Hosted by</p>
-                <p className="font-display text-lg font-bold">{ws.host?.name || "Host"}</p>
+                <p className="text-lg font-bold">{ws.host?.name || "Host"}</p>
               </div>
             </div>
             <button
               onClick={handleContactHost}
               disabled={contacting}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover disabled:opacity-60"
             >
               <MessageCircle className="h-4 w-4" />
               {contacting ? "Opening chat…" : "Chat with host"}
@@ -331,14 +331,14 @@ function WorkspacePage() {
           </div>
 
           <div className="border-b border-border py-6">
-            <h2 className="font-display text-2xl font-bold">About this space</h2>
+            <h2 className="text-2xl font-bold">About this space</h2>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {ws.description || "No description has been added for this workspace yet."}
             </p>
           </div>
 
           <div className="border-b border-border py-6">
-            <h2 className="font-display text-2xl font-bold">What this space offers</h2>
+            <h2 className="text-2xl font-bold">What this space offers</h2>
             {(ws.amenities || []).length === 0 ? (
               <p className="mt-3 text-sm text-muted-foreground">No amenities listed yet.</p>
             ) : (
@@ -346,7 +346,7 @@ function WorkspacePage() {
                 {(ws.amenities || []).map((amenity) => (
                   <div
                     key={amenity}
-                    className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-3"
+                    className="flex items-center gap-3 rounded-xl border border-border bg-surface p-3"
                   >
                     <span className="h-2 w-2 rounded-full bg-primary" />
                     <span className="text-sm">{amenity}</span>
@@ -365,9 +365,9 @@ function WorkspacePage() {
           />
 
           <div className="py-6">
-            <h2 className="font-display text-2xl font-bold">Reviews</h2>
+            <h2 className="text-2xl font-bold">Reviews</h2>
             {reviews.length === 0 ? (
-              <div className="mt-4 rounded-3xl border border-dashed border-border p-8 text-center">
+              <div className="mt-4 rounded-xl border border-dashed border-border p-8 text-center">
                 <p className="font-semibold">No reviews yet</p>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Reviews from completed bookings will show here.
@@ -385,12 +385,12 @@ function WorkspacePage() {
 
         {/* ── Sticky booking sidebar ── */}
         <div>
-          <div className="sticky top-24 rounded-3xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-card)]">
+          <div className="sticky top-24 rounded-xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-card)]">
             <div className="flex items-baseline gap-1.5">
-              <span className="font-display text-3xl font-bold">Rs {ws.price}</span>
+              <span className="text-3xl font-bold">Rs {ws.price}</span>
               <span className="text-sm text-muted-foreground">/ hour</span>
             </div>
-            <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-2xl border border-border">
+            <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl border border-border">
               <label className="border-r border-border p-3">
                 <p className="text-[10px] font-bold uppercase tracking-wider">Date</p>
                 <input
@@ -419,7 +419,7 @@ function WorkspacePage() {
               to="/booking/$id"
               params={{ id: ws._id }}
               search={{ date, hours } as never}
-              className="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)]"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover"
             >
               Book now
             </Link>
@@ -434,12 +434,12 @@ function WorkspacePage() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-surface px-4 py-2.5 text-sm font-medium transition-all hover:border-primary/40 hover:bg-primary/10 hover:text-primary-hover active:scale-[0.98]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary-hover"
                 >
                   <Map className="h-4 w-4" /> Open in Maps
                 </a>
               ) : (
-                <span className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-2xl border border-border bg-surface px-4 py-2.5 text-sm font-medium opacity-40">
+                <span className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-medium opacity-40">
                   <Map className="h-4 w-4" /> Location unavailable
                 </span>
               )}
@@ -463,7 +463,7 @@ function ReviewCard({ review }: { review: WorkspaceReview }) {
   const reviewerName = review.user?.name || "Workship user";
 
   return (
-    <div className="rounded-3xl border border-border bg-surface p-5">
+    <div className="rounded-xl border border-border bg-surface p-5">
       <div className="flex items-center gap-3">
         <img
           src={review.user?.profilePicture || "https://i.pravatar.cc/80"}
@@ -495,7 +495,7 @@ function Stars({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((value) => (
         <Star
           key={value}
-          className={`h-3.5 w-3.5 ${value <= rating ? "fill-primary-hover" : "text-muted-foreground"}`}
+            className={`h-3.5 w-3.5 ${value <= rating ? "fill-clay text-clay" : "text-faint"}`}
         />
       ))}
     </div>

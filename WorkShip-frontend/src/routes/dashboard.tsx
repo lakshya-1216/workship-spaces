@@ -256,7 +256,7 @@ function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Welcome back</p>
-              <h1 className="font-display text-3xl font-bold md:text-4xl">
+              <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">
                 {profile?.name || "Your dashboard"}
               </h1>
             </div>
@@ -292,7 +292,7 @@ function DashboardPage() {
                 }}
                 className={`flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors ${
                   tab === item.id
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-primary-soft text-forest"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
               >
@@ -495,15 +495,15 @@ function formatDate(value: string) {
 }
 
 function statusClass(status: Booking["status"]) {
-  if (status === "confirmed") return "bg-green-500/10 text-green-600";
-  if (status === "cancelled") return "bg-red-500/10 text-red-600";
+  if (status === "confirmed") return "bg-success/15 text-success";
+  if (status === "cancelled") return "bg-destructive/10 text-destructive";
   return "bg-yellow-500/10 text-yellow-700";
 }
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-lg border border-border bg-surface p-5">
-      <h2 className="font-display text-xl font-bold">{title}</h2>
+    <section className="rounded-xl border border-border-subtle bg-surface p-5">
+      <h2 className="text-lg font-bold">{title}</h2>
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -511,9 +511,9 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg border border-border bg-surface p-4">
+    <div className="rounded-xl border border-border-subtle bg-surface p-5">
       <p className="text-sm text-muted-foreground">{label}</p>
-      <p className="mt-2 font-display text-2xl font-bold">{value}</p>
+      <p className="mt-1 text-4xl font-extrabold tracking-tight">{value}</p>
     </div>
   );
 }
@@ -553,7 +553,7 @@ function BookingRow({ booking, onCancel }: { booking: Booking; onCancel?: (id: s
           <span
             className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
               booking.paymentId
-                ? "bg-emerald-500/10 text-emerald-600"
+                ? "bg-primary/10 text-primary-hover"
                 : "bg-yellow-500/10 text-yellow-700"
             }`}
           >
@@ -587,7 +587,7 @@ function BookingRow({ booking, onCancel }: { booking: Booking; onCancel?: (id: s
         {onCancel && booking.status !== "cancelled" && (
           <button
             onClick={() => onCancel(booking._id)}
-            className="rounded-lg border border-red-500/30 px-3 py-2 text-sm text-red-600 hover:bg-red-500/10"
+            className="rounded-lg border border-destructive/30 px-3 py-2 text-sm text-destructive hover:bg-destructive/10"
           >
             Cancel
           </button>
@@ -620,7 +620,7 @@ function Field({
         value={value}
         required={required}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+        className="mt-1 w-full rounded-lg border border-border bg-surface-elevated px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-faint focus:border-primary"
       />
     </label>
   );

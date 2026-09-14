@@ -21,8 +21,8 @@ export function MessageBubble({ msg, showTime }: { msg: BubbleMessage; showTime:
         <div
           className={`break-words rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
             mine
-              ? "rounded-br-sm bg-teal-600 text-white shadow-md dark:bg-teal-500"
-              : "rounded-bl-sm bg-zinc-100 text-foreground shadow-sm dark:bg-zinc-800 dark:text-gray-100"
+              ? "rounded-br-sm bg-primary text-primary-foreground"
+              : "rounded-bl-sm bg-secondary text-secondary-foreground"
           }`}
         >
           {msg.text}
@@ -31,7 +31,7 @@ export function MessageBubble({ msg, showTime }: { msg: BubbleMessage; showTime:
           <div className="flex items-center gap-1 px-2 text-[11px] text-muted-foreground opacity-60">
             <span>{fmt(msg.at)}</span>
             {mine && msg.status && (
-              <span className={msg.status === "seen" ? "text-teal-500" : ""}>
+              <span className={msg.status === "seen" ? "text-primary-hover" : ""}>
                 {msg.status === "sent" && <Check className="h-3 w-3" />}
                 {msg.status === "delivered" && <CheckCheck className="h-3 w-3" />}
                 {msg.status === "seen" && <CheckCheck className="h-3 w-3" />}

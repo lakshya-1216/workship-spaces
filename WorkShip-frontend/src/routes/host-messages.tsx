@@ -66,7 +66,7 @@ function HostMessagesPage() {
   return (
     <HostProtectedRoute>
       <div className="mx-auto h-full max-w-7xl md:p-6">
-        <div className="flex h-full overflow-hidden border border-border bg-background md:rounded-3xl">
+        <div className="flex h-full overflow-hidden border border-border bg-background md:rounded-xl">
           {/* Sidebar */}
           <div className={`${active ? "hidden md:flex" : "flex"} h-full w-full md:w-auto`}>
             <ChatSidebar conversations={conversations} activeId={activeId} onSelect={setActiveId} />
@@ -84,7 +84,7 @@ function HostMessagesPage() {
             ) : (
               <div className="hidden flex-1 items-center justify-center md:flex">
                 <div className="text-center">
-                  <p className="font-display text-xl font-bold">Pick a conversation</p>
+                  <p className="text-xl font-bold">Pick a conversation</p>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Guest conversations appear here in real time.
                   </p>

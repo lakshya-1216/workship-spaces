@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
 import { startSimulation, useTotalUnread } from "@/lib/chat-store";
 import { useAuth } from "@/contexts/AuthContext";
 import { apiUrl } from "@/lib/api";
@@ -128,24 +127,24 @@ function NotificationPanel({
 
   const iconMap = {
     booking: (
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary-hover">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary-hover">
         <Calendar className="h-4 w-4" />
       </span>
     ),
     upcoming: (
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-500">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/15 text-amber-500">
         <Bell className="h-4 w-4" />
       </span>
     ),
     cancelled: (
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-red-500/15 text-red-500">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500/15 text-red-500">
         <X className="h-4 w-4" />
       </span>
     ),
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-2xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up z-50">
+    <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up z-50">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <h3 className="text-sm font-bold">Notifications</h3>
@@ -166,7 +165,7 @@ function NotificationPanel({
           <div className="flex flex-col gap-3 p-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex gap-3 animate-pulse">
-                <div className="h-9 w-9 shrink-0 rounded-2xl bg-secondary" />
+                <div className="h-9 w-9 shrink-0 rounded-lg bg-secondary" />
                 <div className="flex-1 space-y-1.5">
                   <div className="h-2.5 w-2/3 rounded-full bg-secondary" />
                   <div className="h-2 w-full rounded-full bg-secondary" />
@@ -276,7 +275,7 @@ function NotificationBell({ token }: { token: string | null }) {
       <button
         onClick={handleOpen}
         aria-label="Notifications"
-        className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+        className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
       >
         <Bell className="h-4 w-4" />
         {unreadCount > 0 && (
@@ -308,7 +307,7 @@ function IconButton({
     <Link
       to={to}
       aria-label={label}
-      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+      className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
     >
       {children}
       {badge ? (
@@ -350,7 +349,7 @@ function HostButton({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className="hidden items-center rounded-full border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all hover:border-primary/40 hover:bg-accent hover:text-primary-hover lg:inline-flex"
+      className="hidden items-center rounded-lg border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary-hover lg:inline-flex"
     >
       {label}
     </Link>
@@ -476,7 +475,7 @@ function CityAutocomplete({
     <div ref={containerRef} className="relative flex-1 max-w-xl">
       <form
         onSubmit={onSubmit}
-        className="flex h-12 items-center gap-2 rounded-2xl border border-border bg-surface-elevated pl-4 pr-1.5 shadow-[var(--shadow-soft)] transition-all focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/10"
+        className="flex h-12 items-center gap-2 rounded-xl border border-border bg-surface-elevated pl-4 pr-1.5 transition-colors focus-within:border-primary/60"
       >
         <Search className="h-4 w-4 text-muted-foreground" />
         <input
@@ -490,7 +489,7 @@ function CityAutocomplete({
         />
         <button
           type="submit"
-          className="rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+          className="rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           Search
         </button>
@@ -567,11 +566,26 @@ export function Navbar() {
     navigate({ to: "/", replace: true });
   }
 
+  // Account links shared by the desktop dropdown and the mobile in-flow panel.
+  const profileLinks: Array<{ to: string; label: string; search?: Record<string, unknown> }> = [
+    { to: "/search", label: "Explore" },
+    { to: "/wishlist", label: "Wishlist" },
+    { to: "/chat", label: "Messages" },
+    { to: "/dashboard", label: "Profile", search: { tab: "profile" } },
+    ...(isHostLoggedIn
+      ? [
+          { to: "/host-dashboard", label: "Host Dashboard" },
+          { to: "/add-listing", label: "Add Listing" },
+          { to: "/host-messages", label: "Host Messages" },
+        ]
+      : [{ to: "/host", label: "Become a Host" }]),
+  ];
+
   return (
-    <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm">
       {/* Main bar */}
-      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-2 px-4 md:justify-start md:gap-6 md:px-8">
-        <Logo />
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 md:justify-start md:gap-6 md:px-6">
+        <Logo showWordmark={false} />
 
         <div className="hidden flex-1 md:flex md:justify-center">
           <div className="w-full max-w-md">
@@ -589,8 +603,6 @@ export function Navbar() {
         </div>
 
         <nav className="ml-auto flex shrink-0 items-center gap-1">
-          <ThemeToggle />
-
           {isAuthenticated ? (
             <>
               <div className="mr-2 hidden items-center gap-5 xl:flex">
@@ -616,10 +628,12 @@ export function Navbar() {
 
               <div className="mx-3 h-6 w-px bg-border" />
 
-              <div className="relative">
+              <div className="relative hidden md:block">
                 <button
                   onClick={() => setProfileOpen((v) => !v)}
-                  className="flex items-center gap-2.5 rounded-full border border-border bg-surface-elevated px-2.5 py-1.5 shadow-[var(--shadow-soft)] transition-all hover:border-primary/40 hover:shadow-md"
+                  aria-expanded={profileOpen}
+                  aria-label="Account menu"
+                  className="flex items-center gap-2.5 rounded-lg border border-border bg-surface-elevated px-2.5 py-1.5 transition-colors hover:border-primary/40"
                 >
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground">
                     <User2 className="h-3.5 w-3.5" />
@@ -630,27 +644,15 @@ export function Navbar() {
                 {profileOpen && (
                   <div
                     onMouseLeave={() => setProfileOpen(false)}
-                    className="absolute right-0 mt-2.5 w-56 origin-top-right rounded-2xl border border-border bg-popover p-1.5 text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up"
+                    className="absolute right-0 mt-2.5 w-56 origin-top-right rounded-xl border border-border bg-popover p-1.5 text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up"
                   >
-                    {[
-                      { to: "/search", label: "Explore" },
-                      { to: "/wishlist", label: "Wishlist" },
-                      { to: "/chat", label: "Messages" },
-                      { to: "/dashboard", label: "Profile", search: { tab: "profile" } },
-                      ...(isHostLoggedIn
-                        ? [
-                            { to: "/host-dashboard", label: "Host Dashboard" },
-                            { to: "/add-listing", label: "Add Listing" },
-                            { to: "/host-messages", label: "Host Messages" },
-                          ]
-                        : [{ to: "/host", label: "Become a Host" }]),
-                    ].map((item) => (
+                    {profileLinks.map((item) => (
                       <Link
                         key={item.to}
                         to={item.to}
-                        search={"search" in item ? (item.search as never) : undefined}
+                        search={item.search as never}
                         onClick={() => setProfileOpen(false)}
-                        className="flex items-center rounded-xl px-3 py-2 text-sm transition-colors hover:bg-secondary"
+                        className="flex items-center rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary"
                       >
                         {item.label}
                       </Link>
@@ -658,23 +660,35 @@ export function Navbar() {
                     {isHostLoggedIn && (
                       <button
                         onClick={handleExitHostMode}
-                        className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-secondary"
+                        className="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-secondary"
                       >
                         Exit Host Mode
                       </button>
                     )}
                     <hr className="my-1 border-border" />
-                    <button className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-secondary">
+                    <button className="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-secondary">
                       Help & support
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm text-red-500 transition-colors hover:bg-red-500/10"
+                      className="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-red-500 transition-colors hover:bg-red-500/10"
                     >
                       Sign out
                     </button>
                   </div>
                 )}
+              </div>
+              <div className="md:hidden">
+                <button
+                  onClick={() => setProfileOpen((v) => !v)}
+                  aria-expanded={profileOpen}
+                  aria-label="Account menu"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface-elevated transition-colors hover:bg-secondary"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <User2 className="h-3 w-3" />
+                  </span>
+                </button>
               </div>
             </>
           ) : (
@@ -682,51 +696,89 @@ export function Navbar() {
               <div className="mx-1 hidden h-6 w-px bg-border md:block" />
               <Link
                 to="/login"
-                className="hidden rounded-full px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary md:block"
+                className="hidden rounded-lg px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary md:block"
               >
                 Log in
               </Link>
               <Link
                 to="/signup"
-                className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-md md:block"
+                className="hidden rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover md:block"
               >
                 Sign up
               </Link>
 
-              <div className="relative ml-1 md:hidden">
+              <div className="ml-1 md:hidden">
                 <button
                   onClick={() => setMobileMenuOpen((v) => !v)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-elevated text-foreground shadow-sm transition-all hover:bg-secondary"
+                  aria-expanded={mobileMenuOpen}
+                  aria-label="Menu"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface-elevated text-foreground transition-colors hover:bg-secondary"
                 >
-                  <Menu className="h-4 w-4" />
+                  {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
                 </button>
-
-                {mobileMenuOpen && (
-                  <div
-                    onMouseLeave={() => setMobileMenuOpen(false)}
-                    className="absolute right-0 mt-2.5 w-48 origin-top-right rounded-2xl border border-border bg-popover p-1.5 text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up"
-                  >
-                    <Link
-                      to="/login"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      to="/signup"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="mt-1 flex w-full items-center rounded-xl px-3 py-2 text-left text-sm font-semibold text-primary-hover transition-colors hover:bg-primary/10"
-                    >
-                      Sign up
-                    </Link>
-                  </div>
-                )}
               </div>
             </>
           )}
         </nav>
       </div>
+
+      {/* Mobile guest menu — its own row in normal flow, always fully clickable */}
+      {!isAuthenticated && mobileMenuOpen && (
+        <div className="border-t border-border-subtle px-4 py-3 md:hidden">
+          <div className="flex flex-col gap-2">
+            <Link
+              to="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="rounded-lg border border-border bg-surface-elevated px-4 py-2.5 text-center text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            >
+              Log in
+            </Link>
+            <Link
+              to="/signup"
+              onClick={() => setMobileMenuOpen(false)}
+              className="rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+            >
+              Sign up
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile account menu — its own row in normal flow, always fully clickable */}
+      {isAuthenticated && profileOpen && (
+        <div className="border-t border-border-subtle px-4 py-3 md:hidden">
+          <p className="px-1 pb-2 text-xs font-semibold uppercase tracking-wider text-faint">
+            {firstName}&rsquo;s account
+          </p>
+          <div className="flex flex-col gap-1">
+            {profileLinks.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                search={item.search as never}
+                onClick={() => setProfileOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                {item.label}
+              </Link>
+            ))}
+            {isHostLoggedIn && (
+              <button
+                onClick={handleExitHostMode}
+                className="rounded-lg px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-secondary"
+              >
+                Exit Host Mode
+              </button>
+            )}
+            <button
+              onClick={handleLogout}
+              className="rounded-lg px-3 py-2.5 text-left text-sm font-medium text-red-500 transition-colors hover:bg-red-500/10"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      )}
 
       {!isHostArea && (
         <div className="px-4 pb-3 md:hidden">

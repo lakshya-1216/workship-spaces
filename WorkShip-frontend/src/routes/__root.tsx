@@ -6,20 +6,20 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
 
 import appCss from "../styles.css?url";
-import logoUrl from "../assets/logo.png";
+import logoUrl from "../assets/logo-2.png";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-7xl font-bold">404</h1>
+        <h1 className="text-7xl font-bold">404</h1>
         <h2 className="mt-4 text-xl font-semibold">We can't find that workspace</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <a
           href="/"
-          className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+          className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           Go home
         </a>
@@ -46,7 +46,7 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -81,7 +81,7 @@ function RootComponent() {
           <Outlet />
         </main>
         {!isChatPage && <Footer />}
-        <Toaster position="top-right" theme="system" richColors closeButton />
+        <Toaster position="top-right" theme="light" richColors closeButton />
       </div>
       </WishlistProvider>
     </AuthProvider>

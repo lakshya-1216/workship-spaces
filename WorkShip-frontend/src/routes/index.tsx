@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Search, Sparkles, MapPin, ArrowRight, Wand2 } from "lucide-react";
+import { Search, MapPin, ArrowRight, Wand2, CalendarCheck, KeyRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-workspace.jpg";
 import { CategoryRail } from "@/components/CategoryRail";
@@ -117,7 +117,7 @@ function HomePage() {
     fetchWorkspaces();
   }, [cat, searchTerm, minPrice, selectedAmenities]);
 
-  const featured = workspaces.slice(0, 3);
+  const featured = workspaces.slice(0, 8);
 
   function submitAiSearch(event: React.FormEvent) {
     event.preventDefault();
@@ -140,157 +140,199 @@ function HomePage() {
 
   return (
     <div>
-      {/* ── Premium Aurora Hero ───────────────────────────────────────────── */}
-      <section className="hero-aurora relative overflow-hidden">
-        {/* ── Background layers: photo + dark veil ─────────────────────── */}
-        <div className="absolute inset-0 -z-10 group">
-          <img
-            src={heroImg}
-            alt=""
-            width={1600}
-            height={1024}
-            className="h-full w-full object-cover opacity-[0.07] transition-transform duration-[3000ms] ease-out dark:opacity-30 group-hover:scale-105"
-          />
-          {/* Dark fade so image doesn't fight the gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background" />
-        </div>
-
-        {/* ── Floating aurora orbs ──────────────────────────────────────── */}
-        <div
-          className="hero-orb"
-          style={{
-            width: "min(44rem, 64vw)",
-            height: "min(28rem, 44vh)",
-            top: "-5vh",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "radial-gradient(circle, rgba(16,185,129,0.18) 0%, rgba(16,185,129,0.04) 58%, transparent 100%)",
-            animationDuration: "18s",
-            animationDelay: "0s",
-          }}
-        />
-        <div
-          className="hero-orb"
-          style={{
-            width: "min(30rem, 42vw)",
-            height: "min(20rem, 32vh)",
-            top: "12vh",
-            right: "8vw",
-            background: "radial-gradient(circle, rgba(20,184,166,0.12) 0%, rgba(20,184,166,0.03) 62%, transparent 100%)",
-            animationDuration: "22s",
-            animationDelay: "-6s",
-          }}
-        />
-
-        {/* Subtle film-grain for perceived depth */}
-        <div className="hero-noise" aria-hidden="true" />
-
-        {/* ── Bottom fade — blends into page background ─────────────────── */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-
-        {/* ── Content ───────────────────────────────────────────────────── */}
-        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 pb-6 pt-8 text-center md:px-6 md:pb-12 md:pt-16 lg:pb-16 lg:pt-20">
-          <div className="flex max-w-4xl flex-col items-center">
-
-            {/* Badge */}
-            <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary-hover backdrop-blur-md transition-transform hover:scale-105">
-              <Sparkles className="h-1.5 w-3.5 shrink-0" /> <span className="truncate">Personalized Workspace Recommendations</span>
-            </span>
-
-            {/* Headline with gradient text */}
-            <h1 className="hero-gradient-text mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
-              Find a place that matches the work you came to do.
-            </h1>
-
-            {/* Sub-headline */}
-            <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-xl">
-              From quiet studios to rooftop desks - book by the hour, chat with hosts in real time,
-              and just show up.
-            </p>
-
-            {/* AI Search box with glow halo */}
-            <form
-              onSubmit={submitAiSearch}
-              className="relative z-10 mt-10 w-full max-w-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-            >
-              {/* Glow halo */}
-              <div className="search-glow" aria-hidden="true" />
-
-              <div className="rounded-[2rem] border border-primary/20 bg-surface-elevated/90 p-2.5 shadow-[var(--shadow-card)] backdrop-blur-xl transition-all">
-                <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 rounded-3xl md:rounded-[1.5rem] bg-background/80 px-4 py-4 md:px-5 md:py-4 transition-all focus-within:bg-background focus-within:ring-2 focus-within:ring-primary/30">
-                  <div className="flex items-center flex-1 gap-3 border-b border-border/50 pb-3 md:border-none md:pb-0">
-                    <Wand2 className="h-5 w-5 md:h-6 md:w-6 animate-pulse text-primary-hover shrink-0" />
-                    <input
-                      value={aiQuery}
-                      onChange={(event) => setAiQuery(event.target.value)}
-                      placeholder="Try 'quiet workspace in Delhi under ₹300'"
-                      className="flex-1 bg-transparent text-base md:text-lg outline-none placeholder:text-muted-foreground/70 min-w-0"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] active:scale-95 w-full md:w-auto mt-2 md:mt-0"
-                  >
-                    <Search className="h-4 w-4 shrink-0" /> Search
-                  </button>
-                </div>
-                <div className="flex flex-wrap justify-center gap-2 px-3 py-3 text-sm text-muted-foreground">
-                  <span className="mr-1">Try:</span>
-                  {[
-                    "quiet workspace in Delhi under 300",
-                    "meeting room for 10 people in Bangalore",
-                    "workspace with parking and coffee",
-                  ].map((suggestion) => (
-                    <button
-                      key={suggestion}
-                      type="button"
-                      onClick={() => setAiQuery(suggestion)}
-                      className="rounded-full bg-secondary/80 px-3 py-1.5 transition-colors hover:bg-primary/20 hover:text-primary-hover"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </section>
-
+      {/* ── Category discovery bar — part of the header ───────────────────── */}
       {/* Sticks below the navbar: mobile header is taller (h-16 bar + h-12
           search + pb-3 = 7.75rem), desktop header is just h-16. */}
-      <section className="sticky top-[7.75rem] z-20 min-w-0 bg-background/90 backdrop-blur-md md:top-16">
-        <div className="mx-auto min-w-0 max-w-7xl px-4 py-2 md:px-6">
+      <section className="sticky top-[7.75rem] z-20 min-w-0 border-b border-border-subtle bg-background/95 backdrop-blur-sm md:top-16">
+        <div className="mx-auto min-w-0 max-w-7xl px-4 md:px-6">
           <CategoryRail active={cat} onChange={setCat} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-6 sm:py-10 md:px-6">
+      {/* ── Editorial hero ──────────────────────────────────────────────── */}
+      <section className="border-b border-border-subtle bg-surface">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 md:px-6 md:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:py-16">
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-clay">
+              Workspaces by the hour
+            </p>
+            <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+              Find a place <em className="font-display font-normal italic">that feels like work.</em>
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
+              Quiet studios, sunlit lofts and rooftop desks — book by the hour, chat with hosts
+              in real time, and just show up.
+            </p>
+
+            {/* AI search */}
+            <form onSubmit={submitAiSearch} className="mt-7 w-full max-w-xl">
+              <div className="flex items-center gap-2 rounded-xl border border-border bg-surface-elevated p-2 pl-4 shadow-[var(--shadow-soft)] transition-colors focus-within:border-primary/60">
+                <Wand2 className="h-4 w-4 shrink-0 text-primary" />
+                <input
+                  value={aiQuery}
+                  onChange={(event) => setAiQuery(event.target.value)}
+                  placeholder="Try 'quiet workspace in Delhi under ₹300'"
+                  aria-label="Describe your ideal workspace"
+                  className="min-w-0 flex-1 bg-transparent py-2 text-[15px] text-foreground outline-none placeholder:text-faint"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                >
+                  <Search className="h-4 w-4 shrink-0" /> Search
+                </button>
+              </div>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="text-[13px] text-muted-foreground">Popular:</span>
+                {[
+                  "quiet workspace in Delhi under 300",
+                  "meeting room for 10 people in Bangalore",
+                  "workspace with parking and coffee",
+                ].map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => setAiQuery(suggestion)}
+                    className="rounded-lg border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </form>
+
+            <div className="mt-5">
+              <Link
+                to="/search"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary-soft px-5 py-2.5 text-sm font-semibold text-forest transition-colors hover:bg-hover-surface"
+              >
+                Browse all spaces <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="min-w-0">
+            <img
+              src={heroImg}
+              alt="A premium Workship workspace"
+              width={1024}
+              height={768}
+              className="aspect-[4/3] w-full rounded-xl border border-border object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Popular cities ──────────────────────────────────────────────── */}
+      {(citiesLoading || topCities.length > 0) && (
+        <section className="mx-auto max-w-7xl px-4 pt-10 md:px-6 md:pt-14">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-bold md:text-2xl">Popular cities</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Neighborhoods members love right now.
+              </p>
+            </div>
+            <Link
+              to="/search"
+              className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex"
+            >
+              See all <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            {citiesLoading
+              ? // Skeleton placeholders
+                Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="animate-pulse flex items-center gap-3 rounded-xl border border-border bg-surface p-4"
+                  >
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-muted" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-3 w-3/4 rounded bg-muted" />
+                      <div className="h-3 w-1/2 rounded bg-muted" />
+                    </div>
+                  </div>
+                ))
+              : topCities.map((item) => (
+                  <Link
+                    key={item.city}
+                    to="/search"
+                    search={{ q: item.city } as never}
+                    className="group flex items-center gap-3 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-primary/40"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-soft">
+                      <MapPin className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold">{item.city}</p>
+                      <p className="truncate text-xs text-muted-foreground">
+                        {item.count} {item.count === 1 ? "space" : "spaces"}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Featured workspaces ─────────────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold md:text-2xl">Featured workspaces</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {loading
+                ? "Finding standout spaces…"
+                : `${workspaces.length} space${workspaces.length !== 1 ? "s" : ""}${
+                    cat !== "all" ? " in this category" : " across every category"
+                  }.`}
+            </p>
+          </div>
+          <Link
+            to="/search"
+            search={cat !== "all" ? ({ category: cat } as never) : undefined}
+            className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex"
+          >
+            Browse all <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
         {loading ? (
           <div className="flex justify-center p-12 text-muted-foreground">Loading workspaces...</div>
         ) : error ? (
-          <div className="flex justify-center p-12 text-red-500">Error: {error}</div>
+          <div className="flex justify-center p-12 text-destructive">Error: {error}</div>
         ) : workspaces.length === 0 ? (
-          <div className="flex justify-center p-12 text-muted-foreground">No workspaces found.</div>
+          <div className="rounded-xl border border-dashed border-border bg-surface p-12 text-center">
+            <p className="font-display text-2xl italic">Nothing here yet.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Try another category, or browse everything.
+            </p>
+            <Link
+              to="/search"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+            >
+              Browse all spaces <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         ) : (
-          <div className="grid min-w-0 grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
-            {workspaces.map((workspace, i) => (
+          <div className="mt-6 grid min-w-0 grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
+            {featured.map((workspace, i) => (
               <WorkspaceCard key={workspace._id || workspace.id} ws={workspace} priority={i < 4} />
             ))}
           </div>
         )}
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-background p-6 md:p-10">
+      {/* ── Recommended ─────────────────────────────────────────────────── */}
+      <section className="border-y border-border-subtle bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-hover">
-                <Sparkles className="h-3 w-3" />
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-clay">
                 {personalised ? "Recommended for you" : "Trending spaces"}
-              </span>
-              <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
+              </p>
+              <h2 className="mt-2 text-xl font-bold md:text-2xl">
                 {personalised ? "Based on what you usually love" : "Most popular right now"}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -302,7 +344,7 @@ function HomePage() {
             <Link
               to="/search"
               search={cat !== "all" ? ({ category: cat } as never) : undefined}
-              className="hidden items-center gap-1 text-sm font-semibold text-primary-hover hover:underline md:inline-flex"
+              className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline md:inline-flex"
             >
               See all <ArrowRight className="h-4 w-4" />
             </Link>
@@ -313,7 +355,7 @@ function HomePage() {
               // Skeleton cards while loading
               Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-[4/3] rounded-[1.25rem] bg-muted" />
+                  <div className="aspect-[4/3] rounded-xl bg-muted" />
                   <div className="mt-3 space-y-2">
                     <div className="h-3 w-3/4 rounded bg-muted" />
                     <div className="h-3 w-1/2 rounded bg-muted" />
@@ -332,48 +374,65 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <br></br>
-      {/* ── Popular Cities ─────────────────────────────────────────────────── */}
-      {(citiesLoading || topCities.length > 0) && (
-        <section className="mx-auto max-w-7xl px-4 pb-20 md:px-6">
-          <h2 className="font-display text-2xl font-bold md:text-3xl">Popular cities</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {citiesLoading
-              ? // Skeleton placeholders
-                Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="animate-pulse flex items-center gap-3 rounded-2xl border border-border bg-surface p-4"
-                  >
-                    <div className="h-10 w-10 shrink-0 rounded-xl bg-muted" />
-                    <div className="flex-1 space-y-2">
-                      <div className="h-3 w-3/4 rounded bg-muted" />
-                      <div className="h-3 w-1/2 rounded bg-muted" />
-                    </div>
-                  </div>
-                ))
-              : topCities.map((item) => (
-                  <Link
-                    key={item.city}
-                    to="/search"
-                    search={{ q: item.city } as never}
-                    className="group flex items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--shadow-card)]"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                      <MapPin className="h-4 w-4 text-primary-hover" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold">{item.city}</p>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {item.count} {item.count === 1 ? "space" : "spaces"}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+
+      {/* ── How Workship works ──────────────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
+        <h2 className="text-xl font-bold md:text-2xl">How Workship works</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          From search to desk in three quiet steps.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              icon: Search,
+              title: "Describe your day",
+              text: "Tell search what you need — quiet corners, big tables, fast Wi-Fi — and browse real spaces.",
+            },
+            {
+              icon: CalendarCheck,
+              title: "Book by the hour",
+              text: "Pick a time, confirm in seconds and pay only for the hours you use.",
+            },
+            {
+              icon: KeyRound,
+              title: "Just show up",
+              text: "Chat with your host in real time, walk in, and do your best work.",
+            },
+          ].map((step) => (
+            <div key={step.title} className="rounded-xl border border-border bg-surface p-6">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                <step.icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-4 text-base font-bold">{step.title}</h3>
+              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Host CTA ────────────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-7xl px-4 pb-14 md:px-6 md:pb-20">
+        <div className="rounded-xl bg-forest text-forest-foreground">
+          <div className="grid items-center gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:p-10">
+            <div className="min-w-0">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-clay">For hosts</p>
+              <h2 className="mt-2 font-display text-3xl leading-tight md:text-4xl">
+                <em className="italic">Turn your space into income.</em>
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-forest-foreground/75 md:text-base">
+                List your studio, loft or meeting room on Workship and welcome members who
+                treat it like their own.
+              </p>
+            </div>
+            <Link
+              to="/host"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-surface px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-hover-surface"
+            >
+              Become a host <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </div>
   );
 }
-

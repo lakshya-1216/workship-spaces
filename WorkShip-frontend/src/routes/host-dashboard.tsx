@@ -165,7 +165,7 @@ function HostDashboardPage() {
         <header className="flex flex-wrap items-end justify-between gap-3 border-b border-border pb-6">
           <div>
             <p className="text-sm text-muted-foreground">Host workspace</p>
-            <h1 className="font-display text-3xl font-bold md:text-4xl">Host dashboard</h1>
+            <h1 className="text-3xl font-bold md:text-4xl">Host dashboard</h1>
           </div>
           <Link
             to="/host-add-listing"
@@ -328,7 +328,7 @@ function HostDashboardPage() {
                   </div>
                   <div className="rounded-lg border border-border bg-background p-5">
                     <p className="text-sm text-muted-foreground">Estimated payout</p>
-                    <p className="mt-2 font-display text-3xl font-bold">
+                    <p className="mt-2 text-3xl font-bold">
                       {loading ? "..." : `Rs ${stats.totalEarnings}`}
                     </p>
                     <p className="mt-2 text-sm text-success">
@@ -406,7 +406,7 @@ function Stat({
           {label}
         </p>
       </div>
-      <p className="mt-3 font-display text-2xl font-bold">{value}</p>
+      <p className="mt-3 text-2xl font-bold">{value}</p>
       <p className="mt-1 inline-flex items-center gap-1 text-xs text-success">
         <ArrowUpRight className="h-3 w-3" /> {trend}
       </p>
@@ -417,7 +417,7 @@ function Stat({
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="rounded-lg border border-border bg-surface p-5">
-      <h2 className="font-display text-xl font-bold">{title}</h2>
+      <h2 className="text-xl font-bold">{title}</h2>
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -442,11 +442,11 @@ function DeleteConfirmModal({
         onClick={onCancel}
       />
       {/* Dialog */}
-      <div className="relative w-full max-w-sm rounded-2xl border border-border bg-popover p-6 shadow-[var(--shadow-pop)]">
+      <div className="relative w-full max-w-sm rounded-xl border border-border bg-popover p-6 shadow-[var(--shadow-pop)]">
         <div className="mb-1 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
           <Trash2 className="h-5 w-5 text-red-500" />
         </div>
-        <h2 className="mt-3 font-display text-lg font-bold">Delete listing?</h2>
+        <h2 className="mt-3 text-lg font-bold">Delete listing?</h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Are you sure you want to delete{" "}
           <span className="font-semibold text-foreground">"{title}"</span>? This

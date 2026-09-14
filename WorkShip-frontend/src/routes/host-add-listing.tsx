@@ -207,7 +207,7 @@ function AddListingPage() {
           <section className="rounded-lg border border-border bg-surface p-5">
             <div>
               <p className="text-sm text-primary-hover">New workspace</p>
-              <h1 className="font-display text-3xl font-bold">Add listing</h1>
+              <h1 className="text-3xl font-bold">Add listing</h1>
             </div>
 
             <div className="mt-6 grid gap-4">
@@ -301,7 +301,7 @@ function AddListingPage() {
 
           <aside className="space-y-6">
             <section className="rounded-lg border border-border bg-surface p-5">
-              <h2 className="font-display text-xl font-bold">Images</h2>
+              <h2 className="text-xl font-bold">Images</h2>
               <label className="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border bg-background p-6 text-center hover:bg-secondary">
                 <ImagePlus className="h-8 w-8 text-muted-foreground" />
                 <span className="mt-3 text-sm font-semibold">Upload workspace photos</span>
@@ -349,7 +349,7 @@ function AddListingPage() {
             <section className="rounded-lg border border-border bg-surface p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="font-display text-xl font-bold">Location</h2>
+                  <h2 className="text-xl font-bold">Location</h2>
                   <p className="mt-1 text-xs text-muted-foreground">
                     Address changes update the map automatically.
                   </p>

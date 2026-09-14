@@ -130,16 +130,13 @@ function VerifyOtpPage() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
-      <div className="w-full max-w-md relative group">
-        {/* Glow */}
-        <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-primary/30 to-primary/10 opacity-50 blur-xl transition-all group-hover:opacity-100 group-hover:duration-500" />
-
-        <div className="relative rounded-[2rem] border border-primary/20 bg-surface-elevated/90 backdrop-blur-xl p-8 shadow-[var(--shadow-card)]">
+      <div className="w-full max-w-md">
+        <div className="rounded-xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-soft)] sm:p-8">
           <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary-hover">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary-hover">
               <ShieldCheck className="h-6 w-6" />
             </div>
-            <h1 className="font-display text-3xl font-bold">Enter your OTP</h1>
+            <h1 className="text-3xl font-bold">Enter your OTP</h1>
             <p className="mt-2 text-sm text-muted-foreground">
               We sent a 6-digit code to{" "}
               <span className="font-semibold text-foreground">{email}</span>.
@@ -189,9 +186,9 @@ function VerifyOtpPage() {
                   onKeyDown={(e) => handleKeyDown(i, e)}
                   className={`h-14 w-12 rounded-xl border text-center text-2xl font-bold outline-none transition-all
                     ${isExpired
-                      ? "border-red-500/30 bg-red-500/5 text-red-400 cursor-not-allowed"
+                      ? "border-destructive/30 bg-destructive/5 text-destructive cursor-not-allowed"
                       : digit
-                      ? "border-primary bg-primary/10 text-primary-hover shadow-[0_0_12px_rgba(16,185,129,0.2)]"
+                      ? "border-primary bg-primary-soft text-forest"
                       : "border-border bg-background/50 hover:border-primary/40 focus:border-primary focus:ring-2 focus:ring-primary/20"
                     }`}
                 />
@@ -201,7 +198,7 @@ function VerifyOtpPage() {
             <Button
               type="submit"
               disabled={loading || otp.length < OTP_LENGTH || isExpired}
-              className="w-full rounded-xl bg-primary py-6 text-base font-bold transition-all hover:scale-[1.02] hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] active:scale-[0.98] disabled:opacity-60 disabled:scale-100"
+              className="w-full rounded-xl bg-primary py-6 text-base font-bold transition-colors hover:bg-primary-hover disabled:opacity-60"
             >
               {loading ? "Verifying..." : "Verify OTP"}
             </Button>

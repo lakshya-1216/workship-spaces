@@ -32,7 +32,7 @@ export function ChatInput({ onSend }: { onSend: (text: string) => void }) {
         </div>
       )}
       <div className="mx-auto max-w-2xl">
-        <div className="flex items-end gap-2 rounded-full border border-border bg-surface-elevated px-4 py-2.5 transition-colors focus-within:border-teal-500/50 focus-within:ring-1 focus-within:ring-teal-500/20">
+        <div className="flex items-end gap-2 rounded-full border border-border bg-surface-elevated px-4 py-2.5 transition-colors focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20">
           <button onClick={() => setShowEmoji((v) => !v)} className="shrink-0 rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label="Emoji">
             <Smile className="h-5 w-5" />
           </button>
@@ -56,7 +56,7 @@ export function ChatInput({ onSend }: { onSend: (text: string) => void }) {
           <button
             onClick={submit}
             disabled={!text.trim()}
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-600 text-white transition-all hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-40 dark:bg-teal-500 dark:hover:bg-teal-600"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Send"
           >
             <Send className="h-4 w-4" />

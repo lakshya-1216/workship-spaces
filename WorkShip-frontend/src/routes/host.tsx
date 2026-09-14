@@ -104,7 +104,7 @@ function HostAccessPage() {
         <section className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[1fr_420px] lg:items-center">
           <div>
             <p className="text-sm font-semibold text-primary-hover">Workship Hosts</p>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
+            <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
               Host mode, separate from your trips.
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
@@ -135,15 +135,14 @@ function HostAccessPage() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute -inset-1 rounded-[2rem] bg-primary/20 opacity-70 blur-xl" />
-            <div className="relative rounded-[2rem] border border-primary/20 bg-surface-elevated/95 p-6 shadow-[var(--shadow-card)] backdrop-blur-xl">
+          <div>
+            <div className="rounded-xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-soft)]">
               <div className="mb-6 flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary-hover">
+                <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary-hover">
                   <KeyRound className="h-5 w-5" />
                 </span>
                 <div>
-                  <h2 className="font-display text-2xl font-bold">Host access</h2>
+                  <h2 className="text-2xl font-bold">Host access</h2>
                   <p className="text-sm text-muted-foreground">Signed in as {user?.email}</p>
                 </div>
               </div>

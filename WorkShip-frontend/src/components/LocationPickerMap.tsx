@@ -28,7 +28,7 @@ export function LocationPickerMap(props: LocationPickerMapProps) {
 
   if (!ClientMap) {
     return (
-      <div className="flex h-72 w-full items-center justify-center rounded-3xl border border-border bg-surface text-sm text-muted-foreground">
+      <div className="flex h-72 w-full items-center justify-center rounded-xl border border-border bg-surface text-sm text-muted-foreground">
         Loading map...
       </div>
     );

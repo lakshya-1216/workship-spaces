@@ -116,16 +116,13 @@ function ResetPasswordPage() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
-      <div className="w-full max-w-md relative group">
-        {/* Glow */}
-        <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-primary/30 to-primary/10 opacity-50 blur-xl transition-all group-hover:opacity-100 group-hover:duration-500" />
-
-        <div className="relative rounded-[2rem] border border-primary/20 bg-surface-elevated/90 backdrop-blur-xl p-8 shadow-[var(--shadow-card)]">
+      <div className="w-full max-w-md">
+        <div className="rounded-xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-soft)] sm:p-8">
           <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary-hover">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary-hover">
               <KeyRound className="h-6 w-6" />
             </div>
-            <h1 className="font-display text-3xl font-bold">Set new password</h1>
+            <h1 className="text-3xl font-bold">Set new password</h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Choose a strong password for{" "}
               <span className="font-semibold text-foreground">{email}</span>.
@@ -200,7 +197,7 @@ function ResetPasswordPage() {
             <Button
               type="submit"
               disabled={loading || newPassword.length < 6 || newPassword !== confirm}
-              className="w-full rounded-xl bg-primary py-6 text-base font-bold transition-all hover:scale-[1.02] hover:bg-primary-hover hover:shadow-[var(--shadow-glow)] active:scale-[0.98] disabled:opacity-60 disabled:scale-100"
+              className="w-full rounded-xl bg-primary py-6 text-base font-bold transition-colors hover:bg-primary-hover disabled:opacity-60"
             >
               {loading ? "Resetting..." : "Reset password"}
             </Button>

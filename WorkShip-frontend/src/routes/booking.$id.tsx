@@ -164,7 +164,7 @@ function BookingPage() {
 
       <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
         {/* ── Left: booking steps ── */}
-        <section className="rounded-3xl border border-border bg-surface-elevated p-5 shadow-[var(--shadow-card)] md:p-8">
+        <section className="rounded-xl border border-border bg-surface-elevated p-5 shadow-[var(--shadow-card)] md:p-8">
           {/* Step indicator */}
           <ol className="grid grid-cols-3 gap-2">
             {STEPS.map((label, index) => (
@@ -192,7 +192,7 @@ function BookingPage() {
             <div className="mt-8 grid gap-6">
               <div>
                 <p className="text-sm font-semibold text-primary-hover">Secure checkout</p>
-                <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">
+                <h1 className="mt-2 text-3xl font-bold tracking-tight">
                   {step === 1 && isVerifying ? "Confirming booking…" : "Complete your booking"}
                 </h1>
                 <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -206,7 +206,7 @@ function BookingPage() {
               {step === 0 && (
                 <>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="rounded-2xl border border-border bg-background p-4">
+                    <label className="rounded-xl border border-border bg-background p-4">
                       <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                         <Calendar className="h-4 w-4" />
                         Date
@@ -218,7 +218,7 @@ function BookingPage() {
                         className="mt-3 w-full bg-transparent text-base font-semibold outline-none"
                       />
                     </label>
-                    <label className="rounded-2xl border border-border bg-background p-4">
+                    <label className="rounded-xl border border-border bg-background p-4">
                       <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                         <Timer className="h-4 w-4" />
                         Hours
@@ -238,17 +238,17 @@ function BookingPage() {
                   </div>
 
                   {/* Workspace preview */}
-                  <div className="rounded-2xl border border-border bg-background p-4">
+                  <div className="rounded-xl border border-border bg-background p-4">
                     <div className="flex gap-4">
                       <img
                         src={ws.images?.[0] || FALLBACK_IMAGE}
                         alt={ws.title}
                         width={144}
                         height={112}
-                        className="h-24 w-28 shrink-0 rounded-2xl object-cover"
+                        className="h-24 w-28 shrink-0 rounded-xl object-cover"
                       />
                       <div className="min-w-0">
-                        <h2 className="font-display text-lg font-bold">{ws.title}</h2>
+                        <h2 className="text-lg font-bold">{ws.title}</h2>
                         <p className="mt-1 flex items-center gap-1 text-sm text-muted-foreground">
                           <MapPin className="h-4 w-4 shrink-0" />
                           <span className="truncate">{location}</span>
@@ -263,7 +263,7 @@ function BookingPage() {
 
                   <button
                     onClick={handleOpenModal}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-glow)]"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover"
                   >
                     <CreditCard className="h-4 w-4" />
                     Pay &amp; Book Now
@@ -275,7 +275,6 @@ function BookingPage() {
               {step === 1 && isVerifying && (
                 <div className="flex flex-col items-center gap-4 py-8 text-center">
                   <div className="relative flex h-16 w-16 items-center justify-center">
-                    <span className="absolute inset-0 animate-ping rounded-full bg-primary/25" />
                     <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-primary/15">
                       <ShieldCheck className="h-6 w-6 text-primary-hover" />
                     </span>
@@ -292,7 +291,7 @@ function BookingPage() {
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-primary-hover animate-fade-in-up">
                 <Check className="h-8 w-8" />
               </div>
-              <h1 className="mt-4 font-display text-3xl font-bold">Booking confirmed</h1>
+              <h1 className="mt-4 text-3xl font-bold">Booking confirmed</h1>
               <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
                 Your payment is verified and the booking is now visible in your dashboard.
               </p>
@@ -305,13 +304,13 @@ function BookingPage() {
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <Link
                   to="/dashboard"
-                  className="rounded-2xl bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary-hover"
+                  className="rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary-hover"
                 >
                   View dashboard
                 </Link>
                 <Link
                   to="/search"
-                  className="rounded-2xl border border-border px-5 py-2.5 text-sm font-semibold hover:bg-secondary"
+                  className="rounded-lg border border-border px-5 py-2.5 text-sm font-semibold hover:bg-secondary"
                 >
                   Browse more
                 </Link>
@@ -321,9 +320,9 @@ function BookingPage() {
         </section>
 
         {/* ── Right: Price summary sidebar ── */}
-        <aside className="h-fit rounded-3xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-card)] lg:sticky lg:top-24">
+        <aside className="h-fit rounded-xl border border-border bg-surface-elevated p-6 shadow-[var(--shadow-card)] lg:sticky lg:top-24">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-xl font-bold">Price summary</h2>
+            <h2 className="text-xl font-bold">Price summary</h2>
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-primary-hover">
               <LockKeyhole className="h-4 w-4" />
             </span>
@@ -339,7 +338,7 @@ function BookingPage() {
             <Row label="Total" value={`Rs ${total}`} bold />
           </div>
 
-          <div className="mt-6 rounded-2xl bg-background p-4 text-sm">
+          <div className="mt-6 rounded-xl bg-background p-4 text-sm">
             <p className="flex items-center gap-2 font-semibold">
               <IndianRupee className="h-4 w-4 text-primary-hover" />
               Mock Payment Gateway
@@ -351,7 +350,7 @@ function BookingPage() {
 
           {/* Host info */}
           {ws.host?.name && (
-            <div className="mt-4 flex items-center gap-3 rounded-2xl border border-border p-3">
+            <div className="mt-4 flex items-center gap-3 rounded-xl border border-border p-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-xs font-bold uppercase">
                 {ws.host.name.charAt(0)}
               </div>

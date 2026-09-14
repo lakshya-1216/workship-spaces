@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+/**
+ * Theme is locked to light mode — there is no theme switcher in the UI.
+ * This hook keeps the `dark` class off even for returning visitors who
+ * previously saved a dark preference or use a dark OS setting.
+ */
 export function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") return "light";
-    const stored = localStorage.getItem("workship-theme");
-    if (stored === "light" || stored === "dark") return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  });
-
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("workship-theme", theme);
-  }, [theme]);
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("workship-theme", "light");
+  }, []);
 
-  return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
+  return { theme: "light" as const, toggle: () => {} };
 }

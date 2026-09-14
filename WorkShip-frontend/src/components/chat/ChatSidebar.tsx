@@ -26,7 +26,7 @@ export function ChatSidebar({
   return (
     <aside className="flex h-full w-full flex-col border-r border-border bg-surface md:w-80 lg:w-96">
       <div className="border-b border-border px-5 py-4">
-        <h2 className="font-display text-xl font-bold">Messages</h2>
+        <h2 className="text-lg font-bold">Messages</h2>
         <p className="text-xs text-muted-foreground">
           {conversations.length} conversation{conversations.length === 1 ? "" : "s"}
         </p>
@@ -56,7 +56,7 @@ export function ChatSidebar({
               key={c._id}
               onClick={() => onSelect(c._id)}
               className={`flex w-full items-start gap-3 border-b border-border p-4 text-left transition-colors ${
-                isActive ? "bg-primary/10 border-l-2 border-l-primary" : "hover:bg-secondary"
+                isActive ? "bg-primary-soft/60 border-l-2 border-l-primary" : "hover:bg-secondary"
               }`}
             >
               {/* Avatar with online indicator for active conv */}
@@ -69,9 +69,7 @@ export function ChatSidebar({
                   className="h-11 w-11 rounded-full object-cover"
                 />
                 {isActive && (
-                  <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-surface bg-emerald-500">
-                    <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-                  </span>
+                  <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-surface bg-primary" />
                 )}
               </div>
               <div className="min-w-0 flex-1">

@@ -61,7 +61,7 @@ export function WorkspaceCard({
       onMouseLeave={() => onHover?.(null)}
       className="group block w-full min-w-0 max-w-full animate-fade-in-up outline-none focus-visible:ring-2 focus-visible:ring-ring/35"
     >
-      <article className="min-w-0 overflow-hidden rounded-[1.25rem] border border-border/80 bg-card shadow-[var(--shadow-soft)] transition-all duration-200 group-hover:-translate-y-1 group-hover:border-primary/40 group-hover:shadow-[var(--shadow-card)] sm:rounded-[1.5rem]">
+      <article className="min-w-0 overflow-hidden rounded-xl border border-border-subtle bg-card shadow-[var(--shadow-soft)] transition-colors duration-200 hover:border-border">
         {/* Compact marketplace image — consistent 4/3 ratio on all breakpoints */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
           <img
@@ -98,7 +98,7 @@ export function WorkspaceCard({
             />
           </button>
           {ws.host?.superhost && (
-            <span className="absolute left-2.5 top-2.5 rounded-full bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-slate-900 shadow-sm">
+            <span className="absolute left-2.5 top-2.5 rounded-md bg-surface/95 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-foreground shadow-sm">
               Superhost
             </span>
           )}
@@ -115,23 +115,16 @@ export function WorkspaceCard({
                 <span className="truncate">{location}</span>
               </p>
             </div>
-            <div className="flex shrink-0 items-center gap-1 rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
-              <Star className="h-3 w-3 fill-current" />
+            <div className="flex shrink-0 items-center gap-1 rounded-full bg-primary-soft/60 px-1.5 py-0.5 text-[11px] font-semibold text-foreground">
+              <Star className="h-3 w-3 fill-clay text-clay" />
               <span>{ws.rating || "New"}</span>
             </div>
           </div>
 
           {ws.amenities && ws.amenities.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1 overflow-hidden">
-              {ws.amenities.slice(0, 3).map((amenity) => (
-                <span
-                  key={amenity}
-                  className="rounded-full bg-secondary px-2 py-0.5 text-[12px] font-medium text-muted-foreground"
-                >
-                  {amenity}
-                </span>
-              ))}
-            </div>
+            <p className="mt-1.5 truncate text-xs text-faint">
+              {ws.amenities.slice(0, 4).join(" · ")}
+            </p>
           )}
 
           <div className="mt-2.5 flex items-end justify-between border-t border-border pt-2.5">

@@ -68,7 +68,7 @@ export function WorkspaceLocationMap({
     <section className="border-b border-border py-6">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <h2 className="font-display text-2xl font-bold">Where you'll work</h2>
+          <h2 className="text-2xl font-bold">Where you'll work</h2>
           {(address || city) && (
             <p className="mt-1 text-sm text-muted-foreground">{address || city}</p>
           )}
@@ -80,12 +80,9 @@ export function WorkspaceLocationMap({
             target="_blank"
             rel="noopener noreferrer"
             title="Open workspace location in Google Maps"
-            className="group inline-flex shrink-0 items-center gap-2 rounded-2xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold shadow-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/10 hover:text-primary-hover hover:shadow-[var(--shadow-card)] active:scale-95"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold transition-colors hover:border-primary/40 hover:text-primary-hover"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             <Map className="h-4 w-4" />
             Open in Maps
           </a>
@@ -99,7 +96,7 @@ export function WorkspaceLocationMap({
           </span>
         )}
       </div>
-      <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-[var(--shadow-soft)]">
+      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-soft)]">
         <OpenStreetMap center={center} points={points} />
       </div>
     </section>
@@ -112,7 +109,7 @@ function OpenStreetMap({ center, points }: { center: [number, number]; points: M
       center={center}
       zoom={15}
       scrollWheelZoom={false}
-      className="h-[340px] w-full md:h-[420px] dark:[&_.leaflet-tile-pane]:brightness-75 dark:[&_.leaflet-tile-pane]:contrast-125"
+      className="h-[340px] w-full md:h-[420px]"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -155,7 +152,7 @@ function getLeafletPosition(location?: WorkspaceLocation): [number, number] | nu
 function MapFallback({ title, message }: { title: string; message: string }) {
   return (
     <section className="border-b border-border py-6">
-      <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-[var(--shadow-soft)]">
+      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-soft)]">
         <div className="flex min-h-[260px] flex-col items-center justify-center gap-3 p-8 text-center text-muted-foreground">
           <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary-hover">
             <MapPin className="h-5 w-5" />

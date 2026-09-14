@@ -36,7 +36,7 @@ export function WorkspaceLocationMap(props: WorkspaceLocationMapProps) {
   if (!ClientMap) {
     return (
       <section className="border-b border-border py-6">
-        <div className="overflow-hidden rounded-3xl border border-border bg-surface shadow-[var(--shadow-soft)]">
+        <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-soft)]">
           <div className="flex min-h-[260px] items-center justify-center p-8 text-center text-sm text-muted-foreground md:min-h-[340px]">
             Loading map...
           </div>

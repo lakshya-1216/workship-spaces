@@ -28,7 +28,7 @@ export function LocationPickerMap({
       center={center}
       zoom={11}
       scrollWheelZoom={false}
-      className="h-72 w-full dark:[&_.leaflet-tile-pane]:brightness-75 dark:[&_.leaflet-tile-pane]:contrast-125"
+      className="h-72 w-full"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Grid3x3, List, Map as MapIcon, SlidersHorizontal, Star, X } from "lucide-react";
+import { Grid3x3, List, Map as MapIcon, SlidersHorizontal, Sparkles, Star, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SearchResultsMap } from "@/components/SearchResultsMap";
 import { WorkspaceCard } from "@/components/WorkspaceCard";
@@ -148,7 +148,7 @@ function AiMatchBadge({
       <span
         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold cursor-default select-none transition-all ${
           tier === "high"
-            ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25"
+            ? "bg-primary/15 text-primary-hover border border-primary/25"
             : tier === "medium"
               ? "bg-primary/15 text-primary-hover border border-primary/25"
               : "bg-secondary text-muted-foreground border border-border"
@@ -157,7 +157,7 @@ function AiMatchBadge({
         <span
           className={`h-1.5 w-1.5 rounded-full ${
             tier === "high"
-              ? "bg-emerald-500"
+              ? "bg-primary"
               : tier === "medium"
                 ? "bg-primary-hover"
                 : "bg-muted-foreground/50"
@@ -376,11 +376,11 @@ function SearchPage() {
               onClick={() => setMinRating(r)}
               className={`inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs font-medium transition-all duration-200 ${
                 minRating === r
-                  ? "border-primary bg-primary/15 text-primary-hover shadow-sm"
+                  ? "border-transparent bg-primary-soft text-forest shadow-sm"
                   : "border-border hover:border-primary/30 hover:bg-secondary/50"
               }`}
             >
-              <Star className="h-3 w-3 fill-current" /> {r === 0 ? "Any" : `${r}+`}
+              <Star className="h-3 w-3 fill-clay text-clay" /> {r === 0 ? "Any" : `${r}+`}
             </button>
           ))}
         </div>
@@ -394,7 +394,7 @@ function SearchPage() {
               onClick={() => toggleAmen(a)}
               className={`rounded-lg border px-3 py-2 text-xs font-medium transition-all duration-200 text-left ${
                 amen.includes(a)
-                  ? "border-primary bg-primary/15 text-primary-hover shadow-sm"
+                  ? "border-transparent bg-primary-soft text-forest shadow-sm"
                   : "border-border hover:border-primary/30 hover:bg-secondary/50"
               }`}
             >
@@ -410,12 +410,12 @@ function SearchPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* ── Sticky header ── */}
-      <div className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
+      {/* ── Sticky header — docks below the navbar like the category bar ── */}
+      <div className="sticky top-[7.75rem] z-40 border-b border-border-subtle bg-background/95 backdrop-blur-sm md:top-16">
         <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
           <div className="flex flex-col gap-4 md:gap-3">
             <div>
-              <h1 className="font-display text-2xl md:text-3xl font-bold">
+              <h1 className="text-2xl md:text-3xl font-bold">
                 {loading
                   ? "Searching..."
                   : isAiMode
@@ -429,7 +429,7 @@ function SearchPage() {
               )}
               {isAiMode && !q && (
                 <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5">
-                  <span className="text-primary-hover">✦</span>
+                  <Sparkles className="h-3.5 w-3.5 text-primary" />
                   Ranked by AI relevance
                 </p>
               )}
@@ -514,7 +514,7 @@ function SearchPage() {
           {/* Sidebar filters */}
           <aside className="hidden lg:block">
             <div className="sticky top-28 rounded-2xl border border-border bg-surface p-6 shadow-sm">
-              <h2 className="font-display text-lg font-bold mb-6">Filters</h2>
+              <h2 className="text-lg font-bold mb-6">Filters</h2>
               {FiltersInner}
             </div>
           </aside>
@@ -529,14 +529,14 @@ function SearchPage() {
               </div>
             ) : error ? (
               <div className="rounded-2xl border border-dashed border-red-500/40 bg-red-50/20 p-12 text-center">
-                <p className="font-display text-lg font-bold text-red-600">
+                <p className="text-lg font-bold text-red-600">
                   Could not load workspaces
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">{error}</p>
               </div>
             ) : filtered.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-border bg-secondary/30 p-12 text-center">
-                <p className="font-display text-xl font-bold">No workspaces found</p>
+                <p className="text-xl font-bold">No workspaces found</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Try another city or widen your filters.
                 </p>
@@ -579,10 +579,10 @@ function SearchPage() {
                             onClick={() => handleMarkerClick(id)}
                             className={`rounded-xl border bg-surface p-4 transition-all duration-200 cursor-pointer ${
                               isActive
-                                ? "border-teal-500 shadow-lg ring-1 ring-teal-500/20 bg-teal-50/20 dark:bg-teal-950/10"
+                                ? "border-primary shadow-sm ring-1 ring-primary/25 bg-primary/5"
                                 : isHovered
-                                  ? "border-teal-400 shadow-md"
-                                  : "border-border hover:border-teal-400/50"
+                                  ? "border-primary/60"
+                                  : "border-border hover:border-primary/40"
                             }`}
                           >
                             <Link to="/workspace/$id" params={{ id }} className="flex gap-3">
@@ -659,7 +659,7 @@ function SearchPage() {
                                 <AiMatchBadge matchPct={matchPct} matchReasons={matchReasons} />
                               )}
                             </div>
-                            <h3 className="font-display text-base sm:text-lg font-bold mt-1">
+                            <h3 className="text-base sm:text-lg font-bold mt-1">
                               {w.title}
                             </h3>
                             <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
@@ -749,7 +749,7 @@ function SearchPage() {
             className="absolute inset-x-0 bottom-0 max-h-[90vh] overflow-y-auto rounded-t-2xl bg-background p-6 animate-fade-in-up"
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-display text-xl font-bold">Filters</h2>
+              <h2 className="text-xl font-bold">Filters</h2>
               <button
                 onClick={() => setFiltersOpen(false)}
                 className="rounded-lg p-2 hover:bg-secondary transition-colors"
