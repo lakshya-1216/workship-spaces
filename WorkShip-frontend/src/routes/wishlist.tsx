@@ -62,7 +62,7 @@ function WishlistPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-3">
             {saved.map((ws) => (
               <WorkspaceCard key={ws._id} ws={ws} />
             ))}

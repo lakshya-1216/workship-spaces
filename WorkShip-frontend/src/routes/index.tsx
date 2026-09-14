@@ -258,13 +258,13 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="sticky top-16 z-20 bg-background/90 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
+      <section className="sticky top-16 z-20 min-w-0 bg-background/90 backdrop-blur-md">
+        <div className="mx-auto min-w-0 max-w-7xl px-4 py-2 md:px-6">
           <CategoryRail active={cat} onChange={setCat} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
+      <section className="mx-auto max-w-7xl px-4 py-6 sm:py-10 md:px-6">
         {loading ? (
           <div className="flex justify-center p-12 text-muted-foreground">Loading workspaces...</div>
         ) : error ? (
@@ -272,7 +272,7 @@ function HomePage() {
         ) : workspaces.length === 0 ? (
           <div className="flex justify-center p-12 text-muted-foreground">No workspaces found.</div>
         ) : (
-          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid min-w-0 grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
             {workspaces.map((workspace, i) => (
               <WorkspaceCard key={workspace._id || workspace.id} ws={workspace} priority={i < 4} />
             ))}
@@ -306,12 +306,12 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-y-5 sm:mt-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-4">
             {recLoading ? (
               // Skeleton cards while loading
               Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-[4/3] rounded-3xl bg-muted" />
+                  <div className="aspect-[4/3] rounded-[1.25rem] bg-muted" />
                   <div className="mt-3 space-y-2">
                     <div className="h-3 w-3/4 rounded bg-muted" />
                     <div className="h-3 w-1/2 rounded bg-muted" />
