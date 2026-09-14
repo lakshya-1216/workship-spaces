@@ -145,7 +145,7 @@ function NotificationPanel({
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-80 origin-top-right rounded-2xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up z-50">
+    <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] origin-top-right rounded-2xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up z-50">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <h3 className="text-sm font-bold">Notifications</h3>

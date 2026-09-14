@@ -258,7 +258,9 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="sticky top-16 z-20 min-w-0 bg-background/90 backdrop-blur-md">
+      {/* Sticks below the navbar: mobile header is taller (h-16 bar + h-12
+          search + pb-3 = 7.75rem), desktop header is just h-16. */}
+      <section className="sticky top-[7.75rem] z-20 min-w-0 bg-background/90 backdrop-blur-md md:top-16">
         <div className="mx-auto min-w-0 max-w-7xl px-4 py-2 md:px-6">
           <CategoryRail active={cat} onChange={setCat} />
         </div>
