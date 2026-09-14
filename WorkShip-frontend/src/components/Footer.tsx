@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="mt-16 border-t border-[#29332b] bg-[#29332b] text-[#f4f1e9]">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 md:grid-cols-4 md:px-6">
         <div className="md:col-span-2">
-          <Logo />
+          <Logo showWordmark={false} />
           <p className="mt-4 max-w-sm text-sm text-[#dce2d4]/80">
             Workship is the easiest way to discover and book inspiring places to work — by the hour, day or week.
           </p>
