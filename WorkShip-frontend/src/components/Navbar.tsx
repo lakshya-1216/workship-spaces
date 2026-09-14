@@ -325,16 +325,20 @@ function NavLink({
   to,
   label,
   search,
+  active,
 }: {
   to: string;
   label: string;
   search?: Record<string, unknown>;
+  active?: boolean;
 }) {
   return (
     <Link
       to={to}
       search={search as never}
-      className="hidden whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-foreground xl:inline-flex"
+      className={`hidden whitespace-nowrap text-sm font-medium transition-colors xl:inline-flex ${
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      }`}
     >
       {label}
     </Link>
@@ -346,7 +350,7 @@ function HostButton({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className="hidden items-center rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-accent hover:text-primary-hover lg:inline-flex"
+      className="hidden items-center rounded-full border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all hover:border-primary/40 hover:bg-accent hover:text-primary-hover lg:inline-flex"
     >
       {label}
     </Link>
@@ -472,7 +476,7 @@ function CityAutocomplete({
     <div ref={containerRef} className="relative flex-1 max-w-xl">
       <form
         onSubmit={onSubmit}
-        className="flex items-center gap-2 rounded-full border border-border bg-surface-elevated pl-4 pr-1.5 py-1.5 shadow-[var(--shadow-soft)] transition-all focus-within:border-primary/50 focus-within:shadow-[var(--shadow-glow)]"
+        className="flex h-12 items-center gap-2 rounded-2xl border border-border bg-surface-elevated pl-4 pr-1.5 shadow-[var(--shadow-soft)] transition-all focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/10"
       >
         <Search className="h-4 w-4 text-muted-foreground" />
         <input
@@ -482,11 +486,11 @@ function CityAutocomplete({
           onKeyDown={handleKeyDown}
           onFocus={() => value && setShowSuggestions(true)}
           placeholder={placeholder}
-          className="flex-1 bg-transparent py-1 text-sm outline-none placeholder:text-muted-foreground"
+          className="min-w-0 flex-1 bg-transparent py-1 text-sm text-foreground outline-none placeholder:text-muted-foreground/75"
         />
         <button
           type="submit"
-          className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover hover:text-primary-foreground [color:oklch(0.22_0.04_195)]"
+          className="rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
         >
           Search
         </button>
@@ -494,7 +498,7 @@ function CityAutocomplete({
 
       {/* Suggestions Dropdown */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up">
+        <div className="absolute top-full left-0 right-0 mt-2 z-50 overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up">
           <ul className="max-h-64 overflow-y-auto">
             {suggestions.map((city, idx) => (
               <li key={city}>
@@ -518,7 +522,7 @@ function CityAutocomplete({
 
       {/* Empty state */}
       {showSuggestions && value.trim() && suggestions.length === 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up">
+        <div className="absolute top-full left-0 right-0 mt-2 z-50 rounded-lg border border-border bg-popover text-popover-foreground shadow-[var(--shadow-pop)] animate-fade-in-up">
           <div className="px-4 py-6 text-center text-sm text-muted-foreground">
             {loading ? "Loading cities..." : "No cities match your search"}
           </div>
@@ -564,9 +568,9 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border glass">
+    <header className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl">
       {/* Main bar */}
-      <div className="mx-auto flex h-[68px] w-full max-w-[1440px] items-center justify-between gap-2 px-4 md:justify-start md:gap-6 md:px-10">
+      <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-2 px-4 md:justify-start md:gap-6 md:px-8">
         <Logo />
 
         <div className="hidden flex-1 md:flex md:justify-center">
@@ -590,13 +594,13 @@ export function Navbar() {
           {isAuthenticated ? (
             <>
               <div className="mr-2 hidden items-center gap-5 xl:flex">
-                <NavLink to="/wishlist" label="Wishlist" />
-                <NavLink to="/dashboard" label="Dashboard" search={{ tab: "profile" } as never} />
+                <NavLink to="/wishlist" label="Wishlist" active={location.pathname === "/wishlist"} />
+                <NavLink to="/dashboard" label="Dashboard" search={{ tab: "profile" } as never} active={location.pathname.startsWith("/dashboard")} />
                 {isHostLoggedIn ? (
                   <>
-                    <NavLink to="/host-dashboard" label="Host Dashboard" />
-                    <NavLink to="/add-listing" label="Add Listing" />
-                    <NavLink to="/host-messages" label="Host Msgs" />
+                    <NavLink to="/host-dashboard" label="Host Dashboard" active={location.pathname.startsWith("/host-dashboard")} />
+                    <NavLink to="/add-listing" label="Add Listing" active={location.pathname.startsWith("/add-listing")} />
+                    <NavLink to="/host-messages" label="Host Msgs" active={location.pathname.startsWith("/host-messages")} />
                   </>
                 ) : (
                   <HostButton to="/host" label="Become a Host" />

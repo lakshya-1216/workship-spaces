@@ -141,7 +141,7 @@ function HomePage() {
   return (
     <div>
       {/* ── Premium Aurora Hero ───────────────────────────────────────────── */}
-      <section className="hero-aurora relative overflow-visible">
+      <section className="hero-aurora relative overflow-hidden">
         {/* ── Background layers: photo + dark veil ─────────────────────── */}
         <div className="absolute inset-0 -z-10 group">
           <img
@@ -149,64 +149,36 @@ function HomePage() {
             alt=""
             width={1600}
             height={1024}
-            className="h-full w-full object-cover opacity-[0.07] dark:opacity-30 transition-transform duration-[3000ms] ease-out group-hover:scale-105"
+            className="h-full w-full object-cover opacity-[0.07] transition-transform duration-[3000ms] ease-out dark:opacity-30 group-hover:scale-105"
           />
           {/* Dark fade so image doesn't fight the gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background" />
         </div>
 
         {/* ── Floating aurora orbs ──────────────────────────────────────── */}
-        {/* Orb 1 — top-centre emerald primary blob */}
         <div
           className="hero-orb"
           style={{
-            width: "65vw",
-            height: "55vh",
-            top: "-20vh",
-            left: "17.5vw",
-            background: "radial-gradient(circle, rgba(16,185,129,0.38) 0%, rgba(16,185,129,0.06) 70%, transparent 100%)",
-            animationDuration: "16s",
+            width: "min(44rem, 64vw)",
+            height: "min(28rem, 44vh)",
+            top: "-5vh",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "radial-gradient(circle, rgba(16,185,129,0.18) 0%, rgba(16,185,129,0.04) 58%, transparent 100%)",
+            animationDuration: "18s",
             animationDelay: "0s",
           }}
         />
-        {/* Orb 2 — right teal accent */}
         <div
           className="hero-orb"
           style={{
-            width: "45vw",
-            height: "50vh",
-            top: "5vh",
-            right: "-10vw",
-            background: "radial-gradient(circle, rgba(20,184,166,0.28) 0%, rgba(20,184,166,0.04) 70%, transparent 100%)",
-            animationDuration: "20s",
-            animationDelay: "-5s",
-          }}
-        />
-        {/* Orb 3 — left cyan accent */}
-        <div
-          className="hero-orb"
-          style={{
-            width: "40vw",
-            height: "45vh",
-            top: "15vh",
-            left: "-8vw",
-            background: "radial-gradient(circle, rgba(6,182,212,0.22) 0%, rgba(6,182,212,0.04) 70%, transparent 100%)",
-            animationDuration: "18s",
-            animationDelay: "-9s",
-          }}
-        />
-        {/* Orb 4 — bottom-centre gentle bleed for seamless page transition */}
-        <div
-          className="hero-orb"
-          style={{
-            width: "60vw",
-            height: "30vh",
-            bottom: "-10vh",
-            left: "20vw",
-            background: "radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)",
+            width: "min(30rem, 42vw)",
+            height: "min(20rem, 32vh)",
+            top: "12vh",
+            right: "8vw",
+            background: "radial-gradient(circle, rgba(20,184,166,0.12) 0%, rgba(20,184,166,0.03) 62%, transparent 100%)",
             animationDuration: "22s",
-            animationDelay: "-12s",
-            filter: "blur(60px)",
+            animationDelay: "-6s",
           }}
         />
 
@@ -286,7 +258,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="sticky top-16 z-20 border-b border-border glass">
+      <section className="sticky top-16 z-20 bg-background/90 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <CategoryRail active={cat} onChange={setCat} />
         </div>

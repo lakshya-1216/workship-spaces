@@ -7,7 +7,7 @@ const ICONS: Record<string, LucideIcon> = {
 
 export function CategoryRail({ active, onChange }: { active: string; onChange: (id: string) => void }) {
   return (
-    <div className="no-scrollbar -mx-4 flex gap-1 overflow-x-auto px-4 md:mx-0 md:px-0">
+    <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
       {categories.map((c) => {
         const Icon = ICONS[c.icon] ?? Sparkles;
         const on = active === c.id;
@@ -15,13 +15,13 @@ export function CategoryRail({ active, onChange }: { active: string; onChange: (
           <button
             key={c.id}
             onClick={() => onChange(c.id)}
-            className={`group flex shrink-0 flex-col items-center gap-2 border-b-2 px-4 py-3 text-xs font-medium transition-colors ${
+            className={`group flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2.5 text-xs font-semibold transition-all ${
               on
-                ? "border-foreground text-foreground"
-                : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
+                ? "border-primary/30 bg-primary/10 text-primary-hover shadow-[0_0_0_1px_rgba(16,185,129,0.12)]"
+                : "border-transparent bg-transparent text-muted-foreground hover:border-border hover:bg-secondary hover:text-foreground"
             }`}
           >
-            <Icon className="h-5 w-5" />
+            <Icon className="h-4 w-4" />
             <span className="whitespace-nowrap">{c.label}</span>
           </button>
         );
